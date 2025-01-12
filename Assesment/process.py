@@ -14,4 +14,19 @@ def load_dataset(filepath):
             data.append(row)
     return data
 
+def handle_view_data_choice(choice, data):
+    if choice == 'A':
+        print("You selected: View Reviews by Park")
+        print(f"Dataset contains {len(data)} rows. (This will be filtered by park in the future)")
+    elif choice == 'B':
+        print("You selected: Number of Reviews by Park and Reviewer Location")
+        print(f"Dataset contains {len(data)} rows. (This will calculate counts by park and location in the future)")
+    elif choice == 'C':
+        print("You selected: Average Score per year by Park")
+        print(f"Dataset contains {len(data)} rows. (This will calculate average scores per year in the future)")
+    elif choice == 'D':
+        print("You selected: Average Score per Park by Reviewer Location")
+        print(f"Dataset contains {len(data)} rows. (This will calculate averages by park and location in the future)")
+    else:
+        print("Invalid choice. Returning to the View Data menu.")
 
