@@ -1,16 +1,51 @@
-# This is a sample Python script.
+"""
+This module is responsible for the overall program flow. It controls how the user interacts with the
+program and how the program behaves. It uses the other modules to interact with the user, carry out
+processing, and for visualising information.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+Note:   any user input/output should be done in the module 'tui'
+        any processing should be done in the module 'process'
+        any visualisation should be done in the module 'visual'
+"""
+from Assesment.visual import handle_visualise_data_choice
+from process import load_dataset
+from tui import (
+display_welcome,
+display_main_menu,
+display_invalid_choice,
+display_view_data_menu,
+display_visualise_data_menu,
+)
+
+def main():
+
+    print("Loading dataset...")
+    data = load_dataset("disneyland_reviews.csv")
+    if not data:
+        print("Failed to load dataset. Exiting program.")
+        return
+    print(f"Dataset loaded successfully. Total rows: {len(data)}")
+    display_welcome() #modified version to get the title on top
+if __name__ == "__main__":
+    main()
+
+while True:
+        choice = display_main_menu()
+        if choice == 'X':
+            print("Exiting the program. Goodbye!")
+            break
+        elif choice == 'A':
+            print("You selected: View Data")
+            sub_choice = display_view_data_menu()
+            handle_view_data_choice(sub_choice, data)
+        elif choice == 'B':
+            print("You selected: Visualise Data")
+            sub_choice = display_visualise_data_menu()
+            handle_visualise_data_choice()
+
+        else:
+            display_invalid_choice()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
