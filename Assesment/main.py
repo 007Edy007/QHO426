@@ -7,8 +7,8 @@ Note:   any user input/output should be done in the module 'tui'
         any processing should be done in the module 'process'
         any visualisation should be done in the module 'visual'
 """
-from Assesment.visual import handle_visualise_data_choice
-from process import load_dataset
+from visual import handle_visualise_data_choice
+from process import load_dataset, handle_view_data_choice
 from tui import (
 display_welcome,
 display_main_menu,
@@ -26,26 +26,31 @@ def main():
         return
     print(f"Dataset loaded successfully. Total rows: {len(data)}")
     display_welcome() #modified version to get the title on top
-if __name__ == "__main__":
-    main()
 
 while True:
-        choice = display_main_menu()
-        if choice == 'X':
-            print("Exiting the program. Goodbye!")
-            break
-        elif choice == 'A':
-            print("You selected: View Data")
+    choice = display_main_menu()
+    if choice == 'X':
+        print("Exiting the program. Goodbye!")
+        break
+    elif choice == 'A':
+        print("You selected: View Data")
+        while True:
             sub_choice = display_view_data_menu()
+            if sub_choice == 'x':
+                break
             handle_view_data_choice(sub_choice, data)
-        elif choice == 'B':
-            print("You selected: Visualise Data")
+    elif choice == 'B':
+        print("You selected: Visualise Data")
+        while True:
             sub_choice = display_visualise_data_menu()
-            handle_visualise_data_choice()
+            if sub_choice == 'x':
+                break
+            handle_visualise_data_choice(sub_choice, data)
 
-        else:
-            display_invalid_choice()
+    else:
+        display_invalid_choice()
 
-
+if __name__ == "__main__":
+    main()
 
 
