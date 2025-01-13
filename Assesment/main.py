@@ -7,50 +7,53 @@ Note:   any user input/output should be done in the module 'tui'
         any processing should be done in the module 'process'
         any visualisation should be done in the module 'visual'
 """
-from visual import handle_visualise_data_choice
 from process import load_dataset, handle_view_data_choice
 from tui import (
-display_welcome,
-display_main_menu,
-display_invalid_choice,
-display_view_data_menu,
-display_visualise_data_menu,
+    display_welcome,
+    display_main_menu,
+    display_invalid_choice,
+    display_view_data_menu,
+    display_visualise_data_menu,
 )
+from visual import handle_visualise_data_choice
 
 def main():
+    # Display the welcome message
+    display_welcome()
 
+    # Load the dataset
     print("Loading dataset...")
     data = load_dataset("disneyland_reviews.csv")
     if not data:
         print("Failed to load dataset. Exiting program.")
         return
+
     print(f"Dataset loaded successfully. Total rows: {len(data)}")
-    print(f"DEBUG: Loaded data contains {len(data)} rows.")
 
-    display_welcome() #modified version to get the title on top
-
-while True:
-    choice = display_main_menu()
-    if choice == 'X':
-        print("Exiting the program. Goodbye!")
-        break
-    elif choice == 'A':
-        print("You selected: View Data")
-        while True:
-            sub_choice = display_view_data_menu()
-            if sub_choice == 'x':
-                break
-            handle_view_data_choice(sub_choice, data)
-    elif choice == 'B':
-        print("You selected: Visualise Data")
-        while True:
-            sub_choice = display_visualise_data_menu()
-            if sub_choice == 'x':
-                break
-            handle_visualise_data_choice(sub_choice, data)
-
-    else:
-        display_invalid_choice()
+    # Main program loop
+    while True:
+        choice = display_main_menu()
+        if choice == 'X':
+            print("Exiting the program. Goodbye!")
+            break
+        elif choice == 'A':
+            print("You selected: View Data")
+            while True:
+                sub_choice = display_view_data_menu()
+                if sub_choice == 'X':
+                    print("Returning to the main menu.")
+                    break
+                handle_view_data_choice(sub_choice, data)
+        elif choice == 'B':
+            print("You selected: Visualise Data")
+            while True:
+                sub_choice = display_visualise_data_menu()
+                if sub_choice == 'X':
+                    print("Returning to the main menu.")
+                    break
+                handle_visualise_data_choice(sub_choice, data)
+        else:
+            display_invalid_choice()
 
 if __name__ == "__main__":
     main()

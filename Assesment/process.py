@@ -7,6 +7,7 @@ It is likely that most sections will require functions to be placed in this modu
 import csv
 
 def load_dataset(filepath):
+    """Loads the dataset from a CSV file."""
     data = []
     try:
         with open(filepath, 'r') as file:
@@ -20,6 +21,7 @@ def load_dataset(filepath):
     return data
 
 def handle_view_data_choice(choice, data):
+    """Handles user selection in the View Data sub-menu."""
     if choice == 'A':
         print("You selected: View Reviews by Park")
         print(f"Dataset contains {len(data)} rows. (This will be filtered by park in the future)")
@@ -34,4 +36,3 @@ def handle_view_data_choice(choice, data):
         print(f"Dataset contains {len(data)} rows. (This will calculate averages by park and location in the future)")
     else:
         print("Invalid choice. Returning to the View Data menu.")
-
