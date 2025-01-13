@@ -25,6 +25,8 @@ def main():
         print("Failed to load dataset. Exiting program.")
         return
     print(f"Dataset loaded successfully. Total rows: {len(data)}")
+    print(f"DEBUG: Loaded data contains {len(data)} rows.")
+
     display_welcome() #modified version to get the title on top
 
 while True:

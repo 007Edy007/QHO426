@@ -8,10 +8,15 @@ import csv
 
 def load_dataset(filepath):
     data = []
-    with open(filepath, 'r') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            data.append(row)
+    try:
+        with open(filepath, 'r') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                data.append(row)
+    except FileNotFoundError:
+        print(f"Error: The file '{filepath}' was not found.")
+    except Exception as e:
+        print(f"An error occurred while loading the file: {e}")
     return data
 
 def handle_view_data_choice(choice, data):
