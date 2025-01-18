@@ -8,16 +8,14 @@ Please note that you do not need to read the data file or perform any other such
 """
 
 def display_welcome():
-    """Displays the welcome message with a formatted title."""
     title = "Disneyland Review Analyser"
-    dashes = "-" * len(title)  # Generate dashes equal to the title's length
+    dashes = "-" * len(title)
     print(dashes)
     print(title)
     print(dashes)
     print()
 
 def display_main_menu():
-    """Displays the main menu options to the user."""
     print("Please enter the letter which corresponds with your desired menu choice:")
     print("[A] View Data")
     print("[B] Visualise Data")
@@ -25,11 +23,9 @@ def display_main_menu():
     return input("Enter your choice: ").strip().upper()
 
 def display_invalid_choice():
-    """Displays a message for invalid choices."""
     print("Invalid choice. Please try again.")
 
 def display_view_data_menu():
-    """Displays the View Data sub-menu."""
     print("\nPlease enter one of the following options:")
     print("[A] View Reviews by Park")
     print("[B] Number of Reviews by Park and Reviewer Location")
@@ -39,7 +35,6 @@ def display_view_data_menu():
     return input("Enter your choice: ").strip().upper()
 
 def display_visualise_data_menu():
-    """Displays the Visualize Data sub-menu."""
     print("\nPlease enter one of the following options:")
     print("[A] Most Reviewed Parks")
     print("[B] Average Scores")

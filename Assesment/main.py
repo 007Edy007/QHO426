@@ -18,19 +18,14 @@ from tui import (
 from visual import handle_visualise_data_choice
 
 def main():
-    # Display the welcome message
-    display_welcome()
-
-    # Load the dataset
     print("Loading dataset...")
     data = load_dataset("disneyland_reviews.csv")
     if not data:
         print("Failed to load dataset. Exiting program.")
         return
-
     print(f"Dataset loaded successfully. Total rows: {len(data)}")
+    display_welcome()
 
-    # Main program loop
     while True:
         choice = display_main_menu()
         if choice == 'X':
