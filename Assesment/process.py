@@ -12,24 +12,45 @@ def load_dataset(filepath):
         reader = csv.DictReader(file)
         for row in reader:
             data.append(row)
-    '''except FileNotFoundError:
-        print(f"Error: The file '{filepath}' was not found.")
-    except Exception as e:
-        print(f"An error occurred while loading the file: {e}")'''
     return data
 
 def handle_view_data_choice(choice, data):
-    if choice == 'A':
-        print("You selected: View Reviews by Park")
-        print(f"Dataset contains {len(data)} rows.")
+    if choice == 'X':
+        return
+    elif choice == 'A':
+        park_name = input("Enter the park name to view its reviews: ")
+        view_reviews_by_park(data, park_name)
     elif choice == 'B':
-        print("You selected: Number of Reviews by Park and Reviewer Location")
-        print(f"Dataset contains {len(data)} rows.")
+        park_name = input("Enter the park name: ")
+        location = input("Enter the reviewer location: ")
+        count_reviews_by_park_and_location(data, park_name, location)
     elif choice == 'C':
-        print("You selected: Average Score per year by Park")
-        print(f"Dataset contains {len(data)} rows.")
+        park_name = input("Enter the park name: ")
+        year = input("Enter the year (YYYY): ")
+        average_rating_by_park_and_year(data, park_name, year)
     elif choice == 'D':
-        print("You selected: Average Score per Park by Reviewer Location")
-        print(f"Dataset contains {len(data)} rows.")
+        print("Future function to display average score per park by reviewer location.")
     else:
-        print("Invalid choice. Returning to the View Data menu.")
+        print("Invalid choice. Please try again.")
+
+def view_reviews_by_park(data, park_name):
+    print(f"\nReviews for {park_name}:")
+    filtered_reviews = [review for review in data if review['Branch'] == park_name]
+    if not filtered_reviews:
+        print("No reviews found for this park.")
+    else:
+        for review in filtered_reviews:
+            print(f"Review ID: {review['Review_ID']}, Rating: {review['Rating']}, Year: {review['Year_Month']}, Reviewer: {review['Reviewer_Location']}")
+
+def count_reviews_by_park_and_location(data, park_name, location):
+    count = sum(1 for review in data if review['Branch'] == park_name and review['Reviewer_Location'] == location)
+    print(f"Number of reviews for {park_name} from {location}: {count}")
+
+def average_rating_by_park_and_year(data, park_name, year):
+    ratings = [int(review['Rating']) for review in data if review['Branch'] == park_name and review['Year_Month'].startswith(year)]
+    if not ratings:
+        print("No ratings found for this park in the specified year.")
+    else:
+        average_rating = sum(ratings) / len(ratings)
+        print(f"Average rating for {park_name} in {year}: {average_rating:.2f}")
+
