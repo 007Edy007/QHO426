@@ -10,9 +10,6 @@ Note:   any user input/output should be done in the module 'tui'
 from process import (
     load_dataset,
     handle_view_data_choice,
-    view_reviews_by_park,
-    count_reviews_by_park_and_location,
-    average_rating_by_park_and_year
 )
 from tui import (
     display_welcome,
