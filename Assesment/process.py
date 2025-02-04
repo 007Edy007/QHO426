@@ -8,10 +8,15 @@ import csv
 
 def load_dataset(filepath):
     data = []
-    with open(filepath, 'r') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            data.append(row)
+    try:
+        with open(filepath, 'r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                data.append(row)
+    except FileNotFoundError:
+        print(f"Error: The file '{filepath}' was not found.")
+    except Exception as e:
+        print(f"An error occurred while loading the file: {e}")
     return data
 
 def handle_view_data_choice(choice, data):
@@ -29,12 +34,13 @@ def handle_view_data_choice(choice, data):
         year = input("Enter the year (YYYY): ")
         average_rating_by_park_and_year(data, park_name, year)
     elif choice == 'D':
-        print("Future function to display average score per park by reviewer location.")
+        park_name = input("Enter the park name: ")
+        location = input("Enter the reviewer location: ")
+        average_score_per_park_by_location(data, park_name, location)
     else:
         print("Invalid choice. Please try again.")
 
 def view_reviews_by_park(data, park_name):
-    print(f"\nReviews for {park_name}:")
     filtered_reviews = [review for review in data if review['Branch'] == park_name]
     if not filtered_reviews:
         print("No reviews found for this park.")
@@ -53,4 +59,13 @@ def average_rating_by_park_and_year(data, park_name, year):
     else:
         average_rating = sum(ratings) / len(ratings)
         print(f"Average rating for {park_name} in {year}: {average_rating:.2f}")
+
+def average_score_per_park_by_location(data, park_name, location):
+    ratings = [int(review['Rating']) for review in data if review['Branch'] == park_name and review['Reviewer_Location'] == location]
+    if not ratings:
+        print("No reviews found for this park from this location.")
+    else:
+        average_rating = sum(ratings) / len(ratings)
+        print(f"Average rating for {park_name} from {location}: {average_rating:.2f}")
+
 

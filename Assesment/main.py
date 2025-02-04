@@ -7,7 +7,13 @@ Note:   any user input/output should be done in the module 'tui'
         any processing should be done in the module 'process'
         any visualisation should be done in the module 'visual'
 """
-from process import load_dataset, handle_view_data_choice, view_reviews_by_park, count_reviews_by_park_and_location, average_rating_by_park_and_year
+from process import (
+    load_dataset,
+    handle_view_data_choice,
+    view_reviews_by_park,
+    count_reviews_by_park_and_location,
+    average_rating_by_park_and_year
+)
 from tui import (
     display_welcome,
     display_main_menu,
